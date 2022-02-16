@@ -33,7 +33,6 @@ public class icpc_2447 {
             arr[x][y] = '*';
             return;
         }
-        System.out.println(N);
         int value = N/3;
 
         for(int i = 0 ; i < 3 ; i ++){
