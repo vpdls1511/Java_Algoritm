@@ -15,6 +15,7 @@ public class icpc_2447 {
         Scanner in = new Scanner(System.in);
         int N = in.nextInt();
         in.close();
+
         arr = new char[N][N];
 
         for(int i = 0 ; i < N ; i++){
