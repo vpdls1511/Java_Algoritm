@@ -1,10 +1,10 @@
-#DFS
+# DFS
 
-dfs는 Stack을 이용해서 해결하는 문제이다.  
+> dfs는 Stack을 이용해서 해결하는 문제이다.  
 하지만, 컴퓨터 자체가 Stack의 방식으로 동작을 하기 때문에, Recursion을 이용하여 해결할 수 있다.
 
-Dept First Search 즉, 깊이 우선 탐색으로 깊은곳을 우선적으로 탐색을 하게 된다.  
-[참고영상](https://www.youtube.com/watch?v=0Njv04WiLV0&t=296s)
+### Dept First Search 즉, 깊이 우선 탐색으로 깊은곳을 우선적으로 탐색을 하게 된다.  
+[DFS 참고영상](https://www.youtube.com/watch?v=0Njv04WiLV0&t=296s)
 
 ```java
 class DFS{
