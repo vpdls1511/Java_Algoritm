@@ -17,8 +17,8 @@ public class icpc_14502 {
     }
 
     static int maxSize = 8;
-    static int[][] map = new int[maxSize][maxSize];
-    static int[][] tempMap = map;
+    static int[][] map ;
+    static int[][] tempMap ;
 
     static Queue<Loc> q = new LinkedList<>();
 
@@ -31,6 +31,9 @@ public class icpc_14502 {
 
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
+
+        map = new int[N][M];
+        tempMap = new int[N][M];
 
         for(int i = 0 ; i < N ; i ++){
             st = new StringTokenizer(br.readLine());
@@ -72,8 +75,8 @@ public class icpc_14502 {
                 int tCol = curr.col + col[i];
 
                 if(tRow < 0 || tRow >= N || tCol < 0 || tCol >= M) continue;
-                if(map[tRow][tCol] == 0){
-                    map[tRow][tCol] = 2;
+                if(tempMap[tRow][tCol] == 0){
+                    tempMap[tRow][tCol] = 2;
                     q.add(new Loc(tRow, tCol));
                 }
             }
@@ -81,17 +84,17 @@ public class icpc_14502 {
 
         for(int i = 0 ; i < N ; i ++){
             for(int j = 0 ; j < M ; j++){
-                if(map[i][j] == 0) count++;
+                if(tempMap[i][j] == 0) count++;
             }
         }
 
         result = Math.max(result, count);
-        resetMap();
     }
 
     private static void findVirus(){
         for(int i = 0 ; i < N ; i ++){
             for(int j = 0 ; j < M ; j++){
+                tempMap[i][j] = map[i][j]; // 맵 복사
                 if(map[i][j] == 2) q.add(new Loc(i,j));
             }
         }
@@ -100,7 +103,7 @@ public class icpc_14502 {
     private static void resetMap(){
         for(int i = 0 ; i < N ; i ++){
             for(int j = 0 ; j < M ; j++){
-                if(map[i][j] == 2) map[i][j] = 0;
+                tempMap[i][j] = map[i][j];
             }
         }
     }
