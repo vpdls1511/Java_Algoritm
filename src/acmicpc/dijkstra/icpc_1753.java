@@ -1,75 +1,62 @@
 package acmicpc.dijkstra;
 
-import java.util.*;
 import java.io.*;
+import java.util.*;
 
 public class icpc_1753 {
-
-    static int V, E; // 정점 , 간선
-    static int K; // 시작점
-
-    static int INF = 100000000;
-
-    static int graph[][];
-    static int Dist[];
-
+    static LinkedList<Node> list[];
+    static int distance[];
+    static boolean visit[];
     public static void main(String[] args) throws Exception{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-        StringTokenizer st = new StringTokenizer(br.readLine());
-
-        V = Integer.parseInt(st.nextToken());
-        E = Integer.parseInt(st.nextToken());
-
-        st = new StringTokenizer(br.readLine());
-        K = Integer.parseInt(st.nextToken());
-
-        graph = new int[V+1][V+1];
-        Dist = new int[V+1];
-        for(int i = 1 ; i <= V ; i++){
-            for(int j = 1 ; j <= V ; j++){
-                if(i == j ) graph[i][j] = 0;
-                else graph[i][j] = INF;
-            }
+        StringTokenizer stz = new StringTokenizer(br.readLine());
+        int v = Integer.parseInt(stz.nextToken());
+        int e = Integer.parseInt(stz.nextToken());
+        int start = Integer.parseInt(br.readLine());
+        visit = new boolean[v+1];
+        list = new LinkedList[v+1];
+        distance = new int[v+1];
+        Arrays.fill(distance, -1);
+        for(int i = 1; i <= v; i++)
+            list[i] = new LinkedList<>();
+        for(int i = 0; i < e; i++) {
+            stz = new StringTokenizer(br.readLine());
+            int v1 = Integer.parseInt(stz.nextToken());
+            int v2 = Integer.parseInt(stz.nextToken());
+            int w = Integer.parseInt(stz.nextToken());
+            list[v1].add(new Node(v2, w));
         }
-
-        for(int i = 1 ; i <= E ; i++){
-            st = new StringTokenizer(br.readLine());
-            int u = Integer.parseInt(st.nextToken());
-            int v = Integer.parseInt(st.nextToken());
-            int w = Integer.parseInt(st.nextToken());
-
-            graph[u][v]  = w;
-        }
-        br.close();
-
-        dijkstra();
-        for(int i = 1 ; i <= V ; i ++){
-            if(Dist[i] == INF) System.out.println("INF");
-            else System.out.println(Dist[i]);
-        }
+        dijkstra(start);
+        StringBuilder sb = new StringBuilder();
+        for(int i = 1; i <= v; i++)
+            sb.append(distance[i] == -1 ? "INF" : distance[i]).append("\n");
+        System.out.print(sb.toString());
     }
-
-    private static void dijkstra(){
-        PriorityQueue<int []> pq = new PriorityQueue<>((a,b) -> a[0]-b[0]);
-        boolean visited[] = new boolean[V + 1];
-        for(int i = 1 ; i <= V ; i++) Dist[i] = INF;
-        Dist[K] = 0;
-        pq.add(new int[] {0, K});
-
-        while(!pq.isEmpty()){
-            int[] curr = pq.poll();
-            int u = curr[1];
-            if(visited[u]) continue;
-
-            visited[u] = true;
-            for(int v = 1 ; v <= V ; v ++){
-                if(Dist[v] > Dist[u] + graph[u][v]){
-                    Dist[v] = Dist[u] + graph[u][v];
-                    pq.add(new int[] { Dist[v], v });
+    public static void dijkstra(int start) {
+        PriorityQueue<Node> pq = new PriorityQueue<>();
+        pq.offer(new Node(start, 0));
+        distance[start] = 0;
+        while(!pq.isEmpty()) {
+            Node now = pq.poll();
+            if(!visit[now.number]) {
+                visit[now.number] = true;
+                for(Node next : list[now.number]) {
+                    if(distance[next.number] == -1 || distance[next.number] > distance[now.number] + next.weight) {
+                        distance[next.number] = distance[now.number] + next.weight;
+                        pq.offer(new Node(next.number, distance[next.number]));
+                    }
                 }
             }
         }
-
+    }
+    static class Node implements Comparable<Node> {
+        int number, weight;
+        Node(int n, int w) {
+            this.number = n;
+            this.weight = w;
+        }
+        public int compareTo(Node n) {
+            return weight - n.weight;
+        }
     }
 }
