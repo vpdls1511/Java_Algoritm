@@ -3,13 +3,7 @@
 
 
 `최대한 이해하면서 풀어보기!`
-
- - [DP](https://github.com/vpdls1511/Java_Algoritm/blob/main/DP.md)
- - [Math](https://github.com/vpdls1511/Java_Algoritm/tree/main/src/acmicpc/math)
- - [BruteForce](https://github.com/vpdls1511/Java_Algoritm/tree/main/src/acmicpc/bruteforce)
- - [Recursion](https://github.com/vpdls1511/Java_Algoritm/tree/main/src/acmicpc/recursion)
- - [Implementation](https://github.com/vpdls1511/Java_Algoritm/tree/main/src/acmicpc/impl)
- - [DFS & BFS](https://github.com/vpdls1511/Java_Algoritm/tree/main/src/acmicpc/dfs_bfs)
+ - [이론 정리](https://github.com/vpdls1511/Java_Algoritm/tree/main/theory)
 
 ***
 
